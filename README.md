@@ -1,68 +1,26 @@
----
-description: REDDEV Development Docs
----
+# REDDEV Development Docs
 
-# Welcome
+This GitBook documentation hub covers the REDDEV resources scanned from:
 
-## Welcome to REDDEV Development
+```text
+C:\Users\Cameron\Desktop\Test Server\txData\QBCore_09152C.base\resources\[Reddev-Scripts]
+```
 
-Professional FiveM development resources, documentation, setup guides, troubleshooting, and changelogs.
+The pages are written for server owners, administrators, and customers. They document install order, configuration, permissions, items, framework/inventory/target support, SQL setup, and common troubleshooting without walking through source code line by line.
 
-***
+## Resource Pages
 
-### Available Documentation
+- [Ammo Boxes](resources/ammo_boxes.md)
+- [Door Creator](resources/doors_creator.md)
+- [Drug Creator](resources/drug_creator.md)
+- [Garage Creator](resources/garage_creator.md)
+- [REDDEV Bodybag](resources/reddev-bodybag.md)
+- [REDDEV Development Tablet](resources/reddev_devtablet.md)
+- [REDDEV House Creator](resources/reddev_housecreator.md)
+- [REDDEV House Creator Props](resources/reddev_housecreator_props.md)
+- [REDDEV Music](resources/reddev_music.md)
+- [Vehicle Radio Disabler](resources/vehicle_radio_disabler.md)
 
-#### REDDEV Stash Creator
+## Recommended First Install
 
-Dynamic stash builder with in-game creation, marker customization, framework support, and inventory integrations.
-
-#### Free Scripts
-
-#### REDDEV Advanced Admin Menu
-
-Modern admin system with moderation tools, player utilities, vehicle controls, logs, and staff management.
-
-***
-
-### Supported Frameworks
-
-* QBCore
-* QBox
-* ESX
-
-***
-
-### Supported Inventory Systems
-
-* ox\_inventory
-* qb-inventory
-* qs-inventory
-* ESX inventories
-
-***
-
-### Support
-
-Need help?
-
-1. Check the troubleshooting pages
-2. Verify dependencies are installed
-3. Open a support ticket in Discord
-
-***
-
-### Links
-
-#### Tebex
-
-https://reddevdevelopment.tebex.io/
-
-#### Discord
-
-[https://discord.gg/MJH5zX7NSg](https://discord.gg/MJH5zX7NSg)
-
-***
-
-### Notes
-
-Documentation is updated regularly as REDDEV resources continue development.
+Start with the REDDEV Development Tablet, then install optional resources beside it. House Creator has a required props package and a stricter SQL order, so install the props and SQL before testing housing workflows.
