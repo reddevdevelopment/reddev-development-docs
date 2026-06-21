@@ -24,6 +24,11 @@ ensure reddev-bodybag
 ensure vehicle_radio_disabler
 ensure reddev_housecreator_props
 ensure reddev_housecreator
+
+ensure PolyZone
+ensure qb-target
+ensure qb-inventory
+ensure reddev-shops
 ```
 
 ## SQL
@@ -43,6 +48,7 @@ ensure reddev_housecreator
 - Add Ammo Boxes items from `ammo_boxes/install/items/items.lua`.
 - Add Bodybag items from `reddev-bodybag/README.md`.
 - Add House Creator items from `reddev_housecreator/[sql]/second_run_inventory_items/README_ITEMS.md`.
+- For REDDEV Shops, make sure sellable items exist in `qb-core/shared/items.lua` or your active inventory item database. Keep `Config.HideMissingItems = true` to hide missing items from live shop menus.
 
 ## Permissions
 
@@ -51,6 +57,20 @@ add_ace group.admin reddev_admin.open allow
 add_ace group.admin reddev_admin.admin allow
 add_ace group.admin doors_creator allow
 add_ace group.admin reddev_door_creator allow
+add_ace group.admin reddev-shops.admin allow
 ```
 
 Also review each resource page for job/gang access settings.
+
+## REDDEV Shops Notes
+
+Only run `reddev-shops` for the unified shop system. Do not also run old shop, riddle, delivery, or `qb-shops` resources beside it.
+
+Low-end servers can tune startup batching in `reddev-shops/config.lua`:
+
+```lua
+Config.Performance.spawnBatchSize = 1
+Config.Performance.spawnBatchDelay = 200
+```
+
+Random riddle ped movement and the arrival watermark are configured in `reddev-shops/modules/riddles/config.lua`.

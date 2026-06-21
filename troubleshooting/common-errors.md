@@ -44,6 +44,42 @@ add_ace group.admin reddev_door_creator allow
 - Confirm the selected target resource is started.
 - If using floating text, confirm the resource has target disabled and prompt distances are reasonable.
 
+## REDDEV Shops Restart Freezes
+
+- Tune startup batching in `reddev-shops/config.lua`:
+
+```lua
+Config.Performance.spawnBatchSize = 1
+Config.Performance.spawnBatchDelay = 200
+```
+
+- Tune riddle startup in `reddev-shops/modules/riddles/config.lua`:
+
+```lua
+RiddleConfig.Performance.spawnBatchDelay = 250
+```
+
+- Make sure old separate shop, riddle, delivery, or `qb-shops` resources are stopped.
+
+## REDDEV Shops Purchases Say Not Enough Money
+
+- Confirm the shop payment method is correct.
+- If cash is stored as an inventory item, keep `Config.CashItemName = "cash"` and `Config.AllowCashMoneyFallback = true`.
+- Riddle entry fees also support cash-as-item and optional bank fallback through `RiddleConfig.AllowBankFallback`.
+
+## Riddle Peds Moved Or Arrival Message Appears
+
+This is controlled by `reddev-shops/modules/riddles/config.lua`:
+
+```lua
+RiddleConfig.RandomSpawns.enabled = true
+RiddleConfig.RandomSpawns.moveEveryMinutes = 20
+RiddleConfig.RandomSpawns.arrivalWatermark.text = "Riddles Have Arrived!"
+RiddleConfig.RandomSpawns.arrivalWatermark.durationSeconds = 20
+```
+
+Set `RiddleConfig.RandomSpawns.enabled = false` to keep riddle peds at static coordinates.
+
 ## Players Stuck In Tablet Or Housing UI
 
 - Use `/reddevunstuck`, `/rdunstuck`, or `/reddevreset`.

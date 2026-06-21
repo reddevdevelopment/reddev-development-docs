@@ -15,6 +15,7 @@
   * [REDDEV House Creator](resources/reddev_housecreator.md)
   * [REDDEV House Creator Props](resources/reddev_housecreator_props.md)
   * [REDDEV Music](resources/reddev_music.md)
+  * [REDDEV Shops](resources/reddev_shops.md)
   * [Vehicle Radio Disabler](resources/vehicle_radio_disabler.md)
 * [Troubleshooting](troubleshooting/common-errors.md)
 * [Changelogs](changelogs/updates.md)

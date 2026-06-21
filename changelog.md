@@ -12,6 +12,7 @@ This section contains update logs, patch notes, improvements, and feature releas
 
 * REDDEV Advanced Admin Menu
 * REDDEV Stash Creator
+* REDDEV Shops
 
 ***
 

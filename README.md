@@ -1,9 +1,16 @@
 # REDDEV Development Docs
 
+Public GitBook:
+
+```text
+https://reddev-development.gitbook.io/reddev-development-docs
+```
+
 This GitBook documentation hub covers the REDDEV resources scanned from:
 
 ```text
 C:\Users\Cameron\Desktop\Test Server\txData\QBCore_09152C.base\resources\[Reddev-Scripts]
+C:\Users\Cameron\Desktop\Test Server\txData\QBCore_09152C.base\resources\[zpx-shops]\reddev-shops
 ```
 
 The pages are written for server owners, administrators, and customers. They document install order, configuration, permissions, items, framework/inventory/target support, SQL setup, and common troubleshooting without walking through source code line by line.
@@ -19,6 +26,7 @@ The pages are written for server owners, administrators, and customers. They doc
 - [REDDEV House Creator](resources/reddev_housecreator.md)
 - [REDDEV House Creator Props](resources/reddev_housecreator_props.md)
 - [REDDEV Music](resources/reddev_music.md)
+- [REDDEV Shops](resources/reddev_shops.md)
 - [Vehicle Radio Disabler](resources/vehicle_radio_disabler.md)
 
 ## Recommended First Install
