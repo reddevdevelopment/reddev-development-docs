@@ -22,6 +22,7 @@ Latest scanned changelog entries include:
 
 Latest documentation entry:
 
+- `1.0.9 - 2026-06-21`: removed the XP overlay blur/backdrop layer that could render as a black square in FiveM CEF and forced the standalone overlay page background transparent.
 - `1.0.8 - 2026-06-21`: made the standalone XP overlay transparent without the hidden shop background, changed riddle arrival messages to normal notifications by default, deferred client startup work, and lazy-loaded the full shop NUI only when a shop opens to reduce restart hitches.
 - `1.0.7 - 2026-06-21`: added lazy riddle ped entity spawning, stopped completed shop lazy-spawn scans, guarded failed ped models from repeated retries, and replaced the large `/xp` native text with a sleek configurable REDDEV NUI XP card.
 - `1.0.6 - 2026-06-21`: added lazy shopkeeper ped entity spawning to reduce restart freezes on low-end clients while keeping blips and interactions available.
