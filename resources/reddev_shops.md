@@ -124,6 +124,7 @@ Low-end startup settings:
 
 ```lua
 Config.Performance.spawnBatchSize = 2
+Config.Performance.startupDelay = 1500
 Config.Performance.spawnBatchDelay = 100
 Config.Performance.modelLoadTimeout = 5000
 Config.Performance.lazyPedSpawning = true
@@ -135,6 +136,7 @@ Config.Performance.drawTextFarWait = 500
 Riddle peds have their own low-end settings in `modules/riddles/config.lua`:
 
 ```lua
+RiddleConfig.Performance.startupDelay = 2500
 RiddleConfig.Performance.spawnBatchDelay = 250
 RiddleConfig.Performance.lazyPedSpawning = true
 RiddleConfig.Performance.lazyPedSpawnPerScan = 1
@@ -142,6 +144,8 @@ RiddleConfig.Performance.lazyPedScanWait = 1500
 ```
 
 Shopkeeper and riddle ped entities lazy-spawn near players by default, so restart creates blips and interaction data first instead of loading every ped model at once. Increase `spawnBatchDelay`, keep `lazyPedSpawnPerScan = 1`, or raise `lazyPedScanWait` if clients still freeze during `restart reddev-shops`.
+
+The full shop NUI is lazy-loaded only when a shop opens. This keeps resource restart lighter because the large menu bundle is not loaded immediately on restart.
 
 Shop XP settings:
 
@@ -275,6 +279,8 @@ Arrival watermark:
 ```lua
 RiddleConfig.RandomSpawns.arrivalWatermark.enabled = true
 RiddleConfig.RandomSpawns.arrivalWatermark.text = "Riddles Have Arrived!"
+RiddleConfig.RandomSpawns.arrivalWatermark.useNotification = true
+RiddleConfig.RandomSpawns.arrivalWatermark.screenText = false
 RiddleConfig.RandomSpawns.arrivalWatermark.durationSeconds = 20
 ```
 

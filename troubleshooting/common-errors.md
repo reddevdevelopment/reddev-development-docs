@@ -50,6 +50,7 @@ add_ace group.admin reddev_door_creator allow
 
 ```lua
 Config.Performance.spawnBatchSize = 1
+Config.Performance.startupDelay = 1500
 Config.Performance.spawnBatchDelay = 200
 Config.Performance.lazyPedSpawning = true
 Config.Performance.lazyPedSpawnPerScan = 1
@@ -58,6 +59,7 @@ Config.Performance.lazyPedSpawnPerScan = 1
 - Tune riddle startup in `reddev-shops/modules/riddles/config.lua`:
 
 ```lua
+RiddleConfig.Performance.startupDelay = 2500
 RiddleConfig.Performance.spawnBatchDelay = 250
 RiddleConfig.Performance.lazyPedSpawning = true
 RiddleConfig.Performance.lazyPedSpawnPerScan = 1
@@ -65,6 +67,7 @@ RiddleConfig.Performance.lazyPedScanWait = 1500
 ```
 
 - Make sure old separate shop, riddle, delivery, or `qb-shops` resources are stopped.
+- The shop menu NUI is lazy-loaded on first shop open, so first menu open after restart can take a moment while restart stays lighter.
 
 ## REDDEV Shops Purchases Say Not Enough Money
 
@@ -98,6 +101,8 @@ This is controlled by `reddev-shops/modules/riddles/config.lua`:
 RiddleConfig.RandomSpawns.enabled = true
 RiddleConfig.RandomSpawns.moveEveryMinutes = 20
 RiddleConfig.RandomSpawns.arrivalWatermark.text = "Riddles Have Arrived!"
+RiddleConfig.RandomSpawns.arrivalWatermark.useNotification = true
+RiddleConfig.RandomSpawns.arrivalWatermark.screenText = false
 RiddleConfig.RandomSpawns.arrivalWatermark.durationSeconds = 20
 ```
 
