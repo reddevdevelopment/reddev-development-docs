@@ -22,6 +22,7 @@ Latest scanned changelog entries include:
 
 Latest documentation entry:
 
+- `1.0.4 - 2026-06-21`: added configurable shop XP disable switch, `/xp` player display, optional persistent XP watermark, advanced per-shop shopkeeper ped tables, and updated customer/GitBook setup notes.
 - `1.0.3 - 2026-06-21`: added low-end restart batching, model-load timeouts, idle drawtext throttling, synchronized random riddle ped movement, configurable riddle arrival watermark, and cash-as-item riddle entry checks.
 - `1.0.2 - 2026-06-21`: added common inventory auto-detection, server-side hidden missing item filtering, item/image compatibility report, REDDEV Development image fallback, and copied active inventory image aliases.
 - `1.0.1 - 2026-06-21`: unified REDDEV shop, migrated QB shops, delivery/restock flow, riddle peds, admin XP tab, XP-gated purchases, target/drawtext support, database XP persistence, and customer setup checklist documented.

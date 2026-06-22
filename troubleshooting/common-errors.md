@@ -67,6 +67,23 @@ RiddleConfig.Performance.spawnBatchDelay = 250
 - If cash is stored as an inventory item, keep `Config.CashItemName = "cash"` and `Config.AllowCashMoneyFallback = true`.
 - Riddle entry fees also support cash-as-item and optional bank fallback through `RiddleConfig.AllowBankFallback`.
 
+## REDDEV Shops XP Still Blocks Purchases
+
+- If shops should not use XP, set this in `reddev-shops/config.lua`:
+
+```lua
+Config.UseXpSystem = false
+```
+
+- Restart `reddev-shops` after changing it.
+- When disabled, the menu hides XP requirements and the server ignores item `xpNeeded` checks.
+
+## REDDEV Shops /xp Display Missing
+
+- Confirm `Config.XpDisplay.enabled = true`.
+- Confirm the command name in `Config.XpDisplay.command`.
+- Set `Config.XpDisplay.persistent = true` if the XP display should stay on screen.
+
 ## Riddle Peds Moved Or Arrival Message Appears
 
 This is controlled by `reddev-shops/modules/riddles/config.lua`:

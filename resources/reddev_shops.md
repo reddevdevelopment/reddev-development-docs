@@ -19,6 +19,8 @@ Only run `reddev-shops`. Do not run old separate shop, riddle, delivery, or qb-s
 - Job, gang, item, license, and explicit user-license restrictions.
 - Weapon metadata support, including server-generated serial/registration values.
 - XP-gated items through REDDEV shop XP.
+- Configurable option to disable shop XP gates entirely.
+- Player `/xp` display with configurable position, duration, and optional persistent watermark.
 - Admin tab inside the shop menu for setting, adding, or removing shop XP.
 - `/setxp` admin command with permission checks.
 - Migrated QB shops and delivery/restock job support.
@@ -79,7 +81,7 @@ Inside the resource:
 - `README.txt`: first-stop customer readme.
 - `CUSTOMER_SETUP_CHECKLIST.txt`: quick install and testing checklist.
 - `HOW_TO_USE.txt`: full setup, player, staff, admin, exports, and troubleshooting guide.
-- `config.lua`: main shops, admin permissions, UI behavior, inventory/target detection, payment item, XP command.
+- `config.lua`: main shops, shopkeeper peds, admin permissions, UI behavior, inventory/target detection, payment item, XP command/display, and XP shop toggle.
 - `compat/qb-shops-config.lua`: migrated QB shops, store stock, delivery job settings.
 - `modules/riddles/config.lua`: riddle peds, blips, answers, start price, rewards, and XP reward.
 - `web/`: NUI shop menu and admin overlay.
@@ -104,6 +106,8 @@ Controls:
 - Notification adapter.
 - Admin permissions.
 - XP command.
+- XP display and optional XP watermark.
+- XP shop requirement toggle.
 - Database column auto-add.
 - Main REDDEV shop locations.
 - Shop labels, peds, blips, markers, categories, items, prices, XP requirements, payment methods, and restrictions.
@@ -126,6 +130,43 @@ Config.Performance.drawTextFarWait = 500
 ```
 
 Increase `spawnBatchDelay` or lower `spawnBatchSize` if clients freeze during `restart reddev-shops`.
+
+Shop XP settings:
+
+```lua
+Config.UseXpSystem = true
+Config.XpDisplay.enabled = true
+Config.XpDisplay.command = "xp"
+Config.XpDisplay.persistent = false
+```
+
+Set `Config.UseXpSystem = false` when shops should ignore all item `xpNeeded` requirements. When disabled, the menu hides XP locks and the server purchase validator skips XP checks.
+
+The `/xp` display can be moved with:
+
+```lua
+Config.XpDisplay.position = {
+    x = 0.035,
+    y = 0.50,
+    align = "left",
+}
+```
+
+Set `Config.XpDisplay.persistent = true` for an always-on XP watermark.
+
+Advanced shopkeeper peds:
+
+```lua
+peds = {
+    [1] = {
+        model = "a_f_m_beach_01",
+        scenario = "WORLD_HUMAN_STAND_MOBILE",
+        coords = vec4(863.37, -1137.26, 23.88, 184.23),
+    },
+}
+```
+
+Use `peds` when one shop needs specific shopkeeper models, scenarios, or multiple shopkeepers. If `peds` is set, it replaces the simple `pedModel + coords` spawn for that shop. Riddle fields like `message`, `answer`, and `answers` are for riddle peds and are ignored by regular shopkeepers.
 
 ### Migrated QB Shop Config
 
@@ -255,6 +296,8 @@ The admin panel can:
 
 The admin panel only works for online player IDs. Every action is checked again on the server before XP changes are applied.
 
+If `Config.UseXpSystem = false`, XP admin changes are blocked because XP shop requirements are disabled.
+
 ## Admin Command
 
 In-game:
@@ -277,6 +320,7 @@ Players can open shops by:
 
 - Walking to a shop ped and pressing `E`.
 - Using `qb-target` or `ox_target` on a shop ped.
+- Running `/xp` to briefly show their current shop XP, if enabled.
 
 Buy flow:
 
@@ -294,7 +338,7 @@ The server checks:
 - Shop validity.
 - Item validity.
 - Correct configured price.
-- XP requirements.
+- XP requirements, unless `Config.UseXpSystem = false`.
 - Money.
 - Inventory capacity.
 - Required license.
@@ -530,6 +574,10 @@ Before going live, test:
 - E-key fallback opens shops.
 - Admin button appears for admins.
 - Admin XP set/add/remove works.
+- `/xp` shows the player's shop XP when `Config.XpDisplay.enabled = true`.
+- The XP watermark stays on screen when `Config.XpDisplay.persistent = true`.
+- XP-locked items block correctly when `Config.UseXpSystem = true`.
+- XP-locked items can be bought without XP when `Config.UseXpSystem = false`.
 - Normal item purchase works.
 - Ammo purchase works.
 - Weapon purchase works.

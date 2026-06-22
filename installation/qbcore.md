@@ -74,3 +74,11 @@ Config.Performance.spawnBatchDelay = 200
 ```
 
 Random riddle ped movement and the arrival watermark are configured in `reddev-shops/modules/riddles/config.lua`.
+
+Shop XP can be disabled for purchases in `reddev-shops/config.lua`:
+
+```lua
+Config.UseXpSystem = false
+```
+
+Players can view shop XP with `/xp`. The display position, duration, and optional persistent watermark are configured under `Config.XpDisplay`.
