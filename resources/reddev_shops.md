@@ -159,14 +159,48 @@ Advanced shopkeeper peds:
 ```lua
 peds = {
     [1] = {
+        model = "mp_m_shopkeep_01",
+        scenario = "PROP_HUMAN_STAND_IMPATIENT",
+        coords = "shop",
+        optionalClothing = "",
+        message = "24/7 Supermarket",
+    },
+    [2] = {
         model = "a_f_m_beach_01",
         scenario = "WORLD_HUMAN_STAND_MOBILE",
         coords = vec4(863.37, -1137.26, 23.88, 184.23),
+        optionalClothing = "",
+        message = "24/7 Supermarket",
     },
 }
 ```
 
-Use `peds` when one shop needs specific shopkeeper models, scenarios, or multiple shopkeepers. If `peds` is set, it replaces the simple `pedModel + coords` spawn for that shop. Riddle fields like `message`, `answer`, and `answers` are for riddle peds and are ignored by regular shopkeepers.
+Use `peds` when one shop needs specific shopkeeper models, scenarios, clothing, or multiple shopkeepers. `coords = "shop"` uses that shop's normal `coords` list. If `peds` is set and `Config.ShopPedsReplaceLegacy = true`, it replaces the simple `pedModel + coords` spawn for that shop.
+
+Global shopkeeper peds can also be configured riddle-style:
+
+```lua
+Config.ShopPeds = {
+    [1] = {
+        shop = "food_store1",
+        model = "mp_m_shopkeep_01",
+        scenario = "WORLD_HUMAN_STAND_MOBILE",
+        coords = vec4(24.47, -1346.62, 29.5, 271.66),
+        optionalClothing = "",
+        message = "Welcome to 24/7 Supermarket.",
+    },
+}
+```
+
+Shopkeeper random movement:
+
+```lua
+Config.ShopPedRandomSpawns.enabled = false
+Config.ShopPedRandomSpawns.moveEveryMinutes = 20
+Config.ShopPedRandomSpawns.arrivalWatermark.text = "Shopkeepers Have Arrived!"
+```
+
+Set `Config.ShopPedRandomSpawns.enabled = true` to make shopkeeper peds move like riddle peds. Use `Config.ShopPedRandomSpawns.spots` for shared movement spots or `Config.ShopPedRandomSpawns.perPedSpots["food_store1:1"]` for one specific ped.
 
 ### Migrated QB Shop Config
 
@@ -563,6 +597,9 @@ Before going live, test:
 - Resource starts with no server console errors.
 - Database column exists or is created.
 - Store peds spawn.
+- Riddle-style shopkeeper `peds` entries spawn.
+- Shopkeeper `optionalClothing` applies when configured with a supported freemode ped model/citizenid.
+- Shopkeeper random movement and arrival watermark work if `Config.ShopPedRandomSpawns.enabled = true`.
 - Riddle peds spawn.
 - Riddle peds move to configured random spots after the configured timer.
 - The `Riddles Have Arrived!` watermark appears for the configured duration.
