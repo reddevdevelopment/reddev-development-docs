@@ -71,9 +71,17 @@ Low-end servers can tune startup batching in `reddev-shops/config.lua`:
 ```lua
 Config.Performance.spawnBatchSize = 1
 Config.Performance.spawnBatchDelay = 200
+Config.Performance.lazyPedSpawning = true
+Config.Performance.lazyPedSpawnPerScan = 1
 ```
 
-Random riddle ped movement and the arrival watermark are configured in `reddev-shops/modules/riddles/config.lua`.
+Random riddle ped movement, the arrival watermark, and riddle lazy ped spawning are configured in `reddev-shops/modules/riddles/config.lua`:
+
+```lua
+RiddleConfig.Performance.lazyPedSpawning = true
+RiddleConfig.Performance.lazyPedSpawnPerScan = 1
+RiddleConfig.Performance.lazyPedScanWait = 1500
+```
 
 Shop XP can be disabled for purchases in `reddev-shops/config.lua`:
 
@@ -81,4 +89,4 @@ Shop XP can be disabled for purchases in `reddev-shops/config.lua`:
 Config.UseXpSystem = false
 ```
 
-Players can view shop XP with `/xp`. The display position, duration, and optional persistent watermark are configured under `Config.XpDisplay`.
+Players can view shop XP with `/xp`. The display uses a small REDDEV NUI card by default. Position, duration, accent color, and optional persistent watermark are configured under `Config.XpDisplay`.

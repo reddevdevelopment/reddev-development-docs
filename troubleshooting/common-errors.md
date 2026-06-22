@@ -51,12 +51,17 @@ add_ace group.admin reddev_door_creator allow
 ```lua
 Config.Performance.spawnBatchSize = 1
 Config.Performance.spawnBatchDelay = 200
+Config.Performance.lazyPedSpawning = true
+Config.Performance.lazyPedSpawnPerScan = 1
 ```
 
 - Tune riddle startup in `reddev-shops/modules/riddles/config.lua`:
 
 ```lua
 RiddleConfig.Performance.spawnBatchDelay = 250
+RiddleConfig.Performance.lazyPedSpawning = true
+RiddleConfig.Performance.lazyPedSpawnPerScan = 1
+RiddleConfig.Performance.lazyPedScanWait = 1500
 ```
 
 - Make sure old separate shop, riddle, delivery, or `qb-shops` resources are stopped.
@@ -82,6 +87,7 @@ Config.UseXpSystem = false
 
 - Confirm `Config.XpDisplay.enabled = true`.
 - Confirm the command name in `Config.XpDisplay.command`.
+- Keep `Config.XpDisplay.useNui = true` for the small REDDEV NUI card.
 - Set `Config.XpDisplay.persistent = true` if the XP display should stay on screen.
 
 ## Riddle Peds Moved Or Arrival Message Appears

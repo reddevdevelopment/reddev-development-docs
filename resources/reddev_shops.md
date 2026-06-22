@@ -126,10 +126,22 @@ Low-end startup settings:
 Config.Performance.spawnBatchSize = 2
 Config.Performance.spawnBatchDelay = 100
 Config.Performance.modelLoadTimeout = 5000
+Config.Performance.lazyPedSpawning = true
+Config.Performance.lazyPedSpawnPerScan = 1
+Config.Performance.lazyPedScanWait = 1500
 Config.Performance.drawTextFarWait = 500
 ```
 
-Increase `spawnBatchDelay` or lower `spawnBatchSize` if clients freeze during `restart reddev-shops`.
+Riddle peds have their own low-end settings in `modules/riddles/config.lua`:
+
+```lua
+RiddleConfig.Performance.spawnBatchDelay = 250
+RiddleConfig.Performance.lazyPedSpawning = true
+RiddleConfig.Performance.lazyPedSpawnPerScan = 1
+RiddleConfig.Performance.lazyPedScanWait = 1500
+```
+
+Shopkeeper and riddle ped entities lazy-spawn near players by default, so restart creates blips and interaction data first instead of loading every ped model at once. Increase `spawnBatchDelay`, keep `lazyPedSpawnPerScan = 1`, or raise `lazyPedScanWait` if clients still freeze during `restart reddev-shops`.
 
 Shop XP settings:
 
@@ -137,12 +149,15 @@ Shop XP settings:
 Config.UseXpSystem = true
 Config.XpDisplay.enabled = true
 Config.XpDisplay.command = "xp"
+Config.XpDisplay.useNui = true
+Config.XpDisplay.durationSeconds = 6
 Config.XpDisplay.persistent = false
+Config.XpDisplay.accentColor = "#e41e2f"
 ```
 
 Set `Config.UseXpSystem = false` when shops should ignore all item `xpNeeded` requirements. When disabled, the menu hides XP locks and the server purchase validator skips XP checks.
 
-The `/xp` display can be moved with:
+The `/xp` display uses a small REDDEV NUI card by default. It can be moved with:
 
 ```lua
 Config.XpDisplay.position = {
@@ -153,6 +168,7 @@ Config.XpDisplay.position = {
 ```
 
 Set `Config.XpDisplay.persistent = true` for an always-on XP watermark.
+Set `Config.XpDisplay.useNui = false` only if you want the old native GTA text fallback.
 
 Advanced shopkeeper peds:
 

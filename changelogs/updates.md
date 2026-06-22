@@ -22,6 +22,8 @@ Latest scanned changelog entries include:
 
 Latest documentation entry:
 
+- `1.0.7 - 2026-06-21`: added lazy riddle ped entity spawning, stopped completed shop lazy-spawn scans, guarded failed ped models from repeated retries, and replaced the large `/xp` native text with a sleek configurable REDDEV NUI XP card.
+- `1.0.6 - 2026-06-21`: added lazy shopkeeper ped entity spawning to reduce restart freezes on low-end clients while keeping blips and interactions available.
 - `1.0.5 - 2026-06-21`: changed shopkeeper ped config to match riddle-style numbered ped entries, added optionalClothing support, global Config.ShopPeds, synced random shopkeeper movement, and configurable shopkeeper arrival watermark.
 - `1.0.4 - 2026-06-21`: added configurable shop XP disable switch, `/xp` player display, optional persistent XP watermark, advanced per-shop shopkeeper ped tables, and updated customer/GitBook setup notes.
 - `1.0.3 - 2026-06-21`: added low-end restart batching, model-load timeouts, idle drawtext throttling, synchronized random riddle ped movement, configurable riddle arrival watermark, and cash-as-item riddle entry checks.
