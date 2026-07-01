@@ -26,6 +26,7 @@ The pages are written for server owners, administrators, and customers. They doc
 - [REDDEV House Creator](resources/reddev_housecreator.md)
 - [REDDEV House Creator Props](resources/reddev_housecreator_props.md)
 - [REDDEV Music](resources/reddev_music.md)
+- [REDDEV Multicharacter](reddev-multicharacter/README.md)
 - [REDDEV Shops](resources/reddev_shops.md)
 - [Vehicle Radio Disabler](resources/vehicle_radio_disabler.md)
 
