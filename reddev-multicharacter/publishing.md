@@ -33,7 +33,7 @@ Create or select a GitHub repository for the resource, then run these commands f
 ```powershell
 cd "C:\Users\Cameron\Documents\Codex\2026-06-12\create-a-new-qbcore-resource-for\outputs\reddev_multicharacter"
 git add .
-git commit -m "Add Soul Ties RP reddev_multicharacter"
+git commit -m "Add RedDev Development reddev_multicharacter"
 git remote add origin <YOUR_GITHUB_REPO_URL>
 git push -u origin main
 ```

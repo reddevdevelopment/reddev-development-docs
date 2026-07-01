@@ -1,12 +1,12 @@
 # reddev_multicharacter
 
-`reddev_multicharacter` is the Soul Ties RP branded multicharacter, arrival, starter package, public transit, City Hall, and car rental system.
+`reddev_multicharacter` is the RedDev Development branded multicharacter, arrival, starter package, public transit, City Hall, and car rental system.
 
-It is designed around a luxury black, brown, and gold arrival experience with custom NUI, cinematic onboarding, configurable starter paths, usable document items, and framework bridges for modern FiveM roleplay servers.
+It is designed around a RedDev black, red, white, and silver arrival experience with custom NUI, cinematic onboarding, configurable starter paths, usable document items, and framework bridges for modern FiveM roleplay servers.
 
 ## Core Features
 
-* Soul Ties RP themed multicharacter UI.
+* RedDev Development themed multicharacter UI.
 * Character preview scene with configurable cameras, peds, animation, weather, and time.
 * New character arrival path selection: Traveler or Citizen.
 * Starter package claim protection with database logging.

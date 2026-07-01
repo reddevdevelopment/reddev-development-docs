@@ -2,7 +2,7 @@
 
 Starter document items are functional inventory items.
 
-Using a document opens a custom Soul Ties RP document UI with configurable page content.
+Using a document opens a custom RedDev Development document UI with configurable page content.
 
 ## Required Items
 
@@ -31,7 +31,7 @@ Config.Documents = {
     hotel_info_pamphlet = {
         label = "Hotel Information Pamphlet",
         title = "Extended Stay & Hotel Information",
-        subtitle = "Welcome to Soul Ties RP",
+        subtitle = "Welcome to RedDev Development",
         documentType = "brochure",
         pages = {
             {

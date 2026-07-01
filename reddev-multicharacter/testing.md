@@ -24,7 +24,7 @@ Do not mark the resource complete until these checks pass in-game.
 * Traveler path works.
 * Citizen path works.
 * Plane arrival cutscene plays.
-* Soul Ties message/logo appears during arrival.
+* RedDev Development message/logo appears during arrival.
 * Custom music plays if configured.
 * Player lands at the selected path.
 * Player can move after the cutscene ends.
