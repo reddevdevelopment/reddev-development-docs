@@ -32,6 +32,13 @@ Latest documentation entry:
 - `1.0.2 - 2026-06-21`: added common inventory auto-detection, server-side hidden missing item filtering, item/image compatibility report, REDDEV Development image fallback, and copied active inventory image aliases.
 - `1.0.1 - 2026-06-21`: unified REDDEV shop, migrated QB shops, delivery/restock flow, riddle peds, admin XP tab, XP-gated purchases, target/drawtext support, database XP persistence, and customer setup checklist documented.
 
+## REDDEV Towing
+
+Latest documentation entry:
+
+- `1.0.0 - 2026-07-13`: published the REDDEV Towing installation, configuration, inventory, SQL, gameplay, troubleshooting, and validation guide for the single-resource package with bundled `flatbed3` and `inm_flatbed_base` assets.
+
 ## Other Resources
 
 No standalone changelog files were found for `ammo_boxes`, `doors_creator`, `drug_creator`, `garage_creator`, `reddev-bodybag`, `reddev_housecreator`, `reddev_housecreator_props`, or `vehicle_radio_disabler` in the scanned resource folders.
+
