@@ -34,4 +34,3 @@ The pages are written for server owners, administrators, and customers. They doc
 ## Recommended First Install
 
 Start with the REDDEV Development Tablet, then install optional resources beside it. House Creator has a required props package and a stricter SQL order, so install the props and SQL before testing housing workflows.
-
