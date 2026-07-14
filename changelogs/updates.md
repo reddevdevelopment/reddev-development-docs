@@ -41,4 +41,3 @@ Latest documentation entry:
 ## Other Resources
 
 No standalone changelog files were found for `ammo_boxes`, `doors_creator`, `drug_creator`, `garage_creator`, `reddev-bodybag`, `reddev_housecreator`, `reddev_housecreator_props`, or `vehicle_radio_disabler` in the scanned resource folders.
-
