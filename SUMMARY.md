@@ -31,4 +31,3 @@
 * [Troubleshooting](troubleshooting/common-errors.md)
 * [Changelogs](changelogs/updates.md)
 * [FAQ](faq.md)
-
