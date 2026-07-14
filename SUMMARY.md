@@ -17,6 +17,7 @@
   * [REDDEV Music](resources/reddev_music.md)
   * [REDDEV Multicharacter](reddev-multicharacter/README.md)
   * [REDDEV Shops](resources/reddev_shops.md)
+  * [REDDEV Towing](resources/reddev_towing.md)
   * [Vehicle Radio Disabler](resources/vehicle_radio_disabler.md)
 * [REDDEV Multicharacter](reddev-multicharacter/README.md)
   * [Installation](reddev-multicharacter/installation.md)
