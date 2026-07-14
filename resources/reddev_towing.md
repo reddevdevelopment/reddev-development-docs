@@ -267,5 +267,3 @@ After installation, verify all of the following in game:
 ## Version
 
 Current documented release: `1.0.0`.
-
-
