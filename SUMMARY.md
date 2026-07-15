@@ -1,4 +1,4 @@
-# Summary
+# Table of contents
 
 * [Home](README.md)
 * [Installation](installation/qbcore.md)
@@ -15,19 +15,10 @@
   * [REDDEV House Creator](resources/reddev_housecreator.md)
   * [REDDEV House Creator Props](resources/reddev_housecreator_props.md)
   * [REDDEV Music](resources/reddev_music.md)
-  * [REDDEV Multicharacter](reddev-multicharacter/README.md)
+  * [REDDEV Multicharacter](/broken/pages/h9ylt83bbBfOneVJgkvj)
   * [REDDEV Shops](resources/reddev_shops.md)
   * [REDDEV Towing](resources/reddev_towing.md)
   * [Vehicle Radio Disabler](resources/vehicle_radio_disabler.md)
-* [REDDEV Multicharacter](reddev-multicharacter/README.md)
-  * [Installation](reddev-multicharacter/installation.md)
-  * [Configuration](reddev-multicharacter/configuration.md)
-  * [Framework Compatibility](reddev-multicharacter/framework-compatibility.md)
-  * [Starter Experience](reddev-multicharacter/starter-experience.md)
-  * [Usable Documents](reddev-multicharacter/usable-documents.md)
-  * [Transit, City Hall, and Rentals](reddev-multicharacter/transit-cityhall-rental.md)
-  * [Publishing](reddev-multicharacter/publishing.md)
-  * [Testing Checklist](reddev-multicharacter/testing.md)
 * [Troubleshooting](troubleshooting/common-errors.md)
 * [Changelogs](changelogs/updates.md)
 * [FAQ](faq.md)
