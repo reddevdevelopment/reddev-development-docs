@@ -28,11 +28,14 @@ The pages are written for server owners, administrators, and customers. They doc
 * [REDDEV House Creator](resources/reddev_housecreator.md)
 * [REDDEV House Creator Props](resources/reddev_housecreator_props.md)
 * [REDDEV Music](resources/reddev_music.md)
-* [REDDEV Multicharacter](/broken/pages/h9ylt83bbBfOneVJgkvj)
 * [REDDEV Shops](resources/reddev_shops.md)
 * [REDDEV Towing](resources/reddev_towing.md)
 * [Vehicle Radio Disabler](resources/vehicle_radio_disabler.md)
 
 ## Recommended First Install
+
+{% content-ref url="reddev_devtablet/reddev-multicharacter.md" %}
+[reddev-multicharacter.md](reddev_devtablet/reddev-multicharacter.md)
+{% endcontent-ref %}
 
 Start with the REDDEV Development Tablet, then install optional resources beside it. House Creator has a required props package and a stricter SQL order, so install the props and SQL before testing housing workflows.

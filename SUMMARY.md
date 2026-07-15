@@ -19,6 +19,7 @@
   * [REDDEV Shops](resources/reddev_shops.md)
   * [REDDEV Towing](resources/reddev_towing.md)
   * [Vehicle Radio Disabler](resources/vehicle_radio_disabler.md)
+  * [REDDEV Multicharacter](reddev_devtablet/reddev-multicharacter.md)
 * [Troubleshooting](troubleshooting/common-errors.md)
 * [Changelogs](changelogs/updates.md)
 * [FAQ](faq.md)
