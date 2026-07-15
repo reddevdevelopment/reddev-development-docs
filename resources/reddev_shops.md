@@ -1,5 +1,7 @@
 # REDDEV Shops
 
+<figure><img src="../.gitbook/assets/reddev-shops-and-riddles.png" alt="REDDEV Shops and Riddles"><figcaption></figcaption></figure>
+
 ## Overview
 
 `reddev-shops` is a unified QBCore shop system that merges regular shops, migrated QB shop locations, delivery/restock gameplay, riddle peds, XP-gated purchases, admin XP controls, target interactions, peds, blips, and one consistent NUI shop menu into a single resource.

@@ -1,5 +1,7 @@
 # REDDEV Towing
 
+<figure><img src="../.gitbook/assets/reddev-towing.png" alt="REDDEV Towing"><figcaption></figcaption></figure>
+
 ## Overview
 
 `reddev_towing` is a self-contained FiveM towing resource built around `flatbed3`, a physical hook-and-winch system, and a tow-remote interface. It can physically tow empty NPC vehicles and regular player-owned vehicles. Persistent impounding is optional and is currently integrated only with `qs-advancedgarages`.

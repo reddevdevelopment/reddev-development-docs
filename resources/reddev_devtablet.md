@@ -1,5 +1,7 @@
 # REDDEV Development Tablet
 
+<figure><img src="../.gitbook/assets/reddev-app-bundle.png" alt="REDDEV Development Tablet app bundle"><figcaption></figcaption></figure>
+
 ## Overview
 
 REDDEV Development Tablet is the central REDDEV in-game tablet for creator tools, administration tools, reports, weather controls, runtime pages, optional apps, and SQL/JSON persistence.
@@ -16,6 +18,16 @@ REDDEV Development Tablet is the central REDDEV in-game tablet for creator tools
 - Target support for ox_target, qb-target, and standalone floating text.
 - SQL-first persistence with JSON fallback.
 - Automatic and manual REDDEV unstuck cleanup.
+
+<figure><img src="../.gitbook/assets/reddev-development-tablet.png" alt="REDDEV Development Tablet interface"><figcaption></figcaption></figure>
+
+| Blip Creator | Ped Creator | Zone Creator |
+| :---: | :---: | :---: |
+| ![Blip Creator](../.gitbook/assets/reddev-blip-creator.png) | ![Ped Creator](../.gitbook/assets/reddev-ped-creator.png) | ![Zone Creator](../.gitbook/assets/reddev-zone-creator.png) |
+| Documentation | Weather | Settings |
+| ![Documentation](../.gitbook/assets/reddev-documentation-app.png) | ![Weather](../.gitbook/assets/reddev-weather.png) | ![Settings](../.gitbook/assets/reddev-settings.png) |
+| Theme |  |  |
+| ![Theme](../.gitbook/assets/reddev-theme.png) |  |  |
 
 ## Dependencies
 

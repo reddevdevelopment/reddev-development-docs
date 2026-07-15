@@ -1,5 +1,7 @@
 # Vehicle Radio Disabler
 
+<figure><img src="../.gitbook/assets/reddev-vehicle-radio-disabler.png" alt="REDDEV Vehicle Radio Disabler"><figcaption></figcaption></figure>
+
 ## Overview
 
 `vehicle_radio_disabler` is a lightweight client-side resource that disables GTA vehicle radio controls and forces vehicle radio stations off while players are inside vehicles.

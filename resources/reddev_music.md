@@ -1,5 +1,7 @@
 # REDDEV Music
 
+<figure><img src="../.gitbook/assets/reddev-music.png" alt="REDDEV Music"><figcaption></figcaption></figure>
+
 ## Overview
 
 REDDEV Music is an optional REDDEV Development Tablet addon for portable world audio, REDDEV tablet controls, and boombox placement powered by xSound.

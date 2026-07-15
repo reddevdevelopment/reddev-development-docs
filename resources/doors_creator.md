@@ -1,5 +1,7 @@
 # Door Creator
 
+<figure><img src="../.gitbook/assets/reddev-door-creator.png" alt="REDDEV Door Creator"><figcaption></figcaption></figure>
+
 ## Overview
 
 REDDEV Door Creator is a tablet-integrated door management addon. It lets approved staff create, edit, delete, lock, unlock, import, and sync doors from the REDDEV Development Tablet.

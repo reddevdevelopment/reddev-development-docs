@@ -1,5 +1,7 @@
 # REDDEV Bodybag
 
+<figure><img src="../.gitbook/assets/reddev-bodybag.png" alt="REDDEV Bodybag"><figcaption></figcaption></figure>
+
 ## Overview
 
 `reddev-bodybag` is a configurable bodybag and death-management resource for FiveM roleplay servers. It supports multiple bodybag item types, job restrictions, bodybag carrying, disposal zones, simulated afterlife teleporting, and optional permanent death flow.

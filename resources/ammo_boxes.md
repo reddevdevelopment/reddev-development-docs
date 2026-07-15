@@ -1,5 +1,7 @@
 # Ammo Boxes
 
+<figure><img src="../.gitbook/assets/reddev-ammo-boxes.png" alt="REDDEV Ammo Boxes"><figcaption></figcaption></figure>
+
 ## Overview
 
 The `ammo_boxes` resource registers usable ammo box items for QBCore-style servers. When a configured box is opened, it removes or validates the box item and gives the configured ammo reward item.

@@ -1,6 +1,6 @@
 # Stash Creator
 
-<figure><img src="../.gitbook/assets/stash_tablet.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/reddev-stash-creator.png" alt="REDDEV Stash Creator"><figcaption></figcaption></figure>
 
 ## Stash Creator
 
@@ -25,6 +25,8 @@ REDDEV Stash Creator allows admins to create, edit, manage, and teleport to stas
 * JSON-based stash saving
 * Access restrictions
 * Job and gang support
+
+<figure><img src="../.gitbook/assets/stash_tablet.png" alt="Stash Creator tablet interface"><figcaption></figcaption></figure>
 
 ***
 

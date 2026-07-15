@@ -1,5 +1,7 @@
 # Drug Creator
 
+<figure><img src="../.gitbook/assets/reddev-drug-creator.png" alt="REDDEV Drug Creator"><figcaption></figcaption></figure>
+
 ## Overview
 
 REDDEV Drug Creator is a drug runtime and creator addon with tablet integration. The scanned config includes planting, plants, zones, selling, shops, bagging, cooking stations, equipment, effects, access, image paths, and item setup.

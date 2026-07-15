@@ -1,5 +1,7 @@
 # REDDEV House Creator
 
+<figure><img src="../.gitbook/assets/reddev-house-creator.png" alt="REDDEV House Creator"><figcaption></figcaption></figure>
+
 ## Overview
 
 REDDEV House Creator is the housing addon for the REDDEV Development Tablet ecosystem. It includes house creation, house management, interiors, keys, doors, furniture, storage, wardrobes, garages, bills, rentals, property upgrades, and recovery commands.

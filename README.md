@@ -1,5 +1,7 @@
 # REDDEV Development Docs
 
+<figure><img src=".gitbook/assets/reddev-development.png" alt="REDDEV Development"><figcaption></figcaption></figure>
+
 Public GitBook:
 
 ```text

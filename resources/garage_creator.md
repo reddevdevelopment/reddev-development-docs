@@ -1,5 +1,7 @@
 # Garage Creator
 
+<figure><img src="../.gitbook/assets/reddev-garage-creator.png" alt="REDDEV Garage Creator"><figcaption></figcaption></figure>
+
 ## Overview
 
 REDDEV Garage Creator is a garage system and REDDEV tablet manager. It covers public, job, gang, private, and impound garages with vehicle storage, spawning, transfers, parking states, fees, and runtime tablet menus.
