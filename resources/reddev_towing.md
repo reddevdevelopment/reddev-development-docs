@@ -2,268 +2,340 @@
 
 ## Overview
 
-`reddev_towing` is a professional towing-job resource for FiveM with an interactive flatbed, working bed and winch controls, contract missions, configurable payouts, and persistent driver progression.
+`reddev_towing` is a self-contained FiveM towing resource built around `flatbed3`, a physical hook-and-winch system, and a tow-remote interface. It can physically tow empty NPC vehicles and regular player-owned vehicles. Persistent impounding is optional and is currently integrated only with `qs-advancedgarages`.
 
-The required `flatbed3` vehicle and `inm_flatbed_base` bed object are bundled inside the resource. Do not install or start a separate functional-flatbed resource.
+The required `flatbed3` truck and `inm_flatbed_base` movable bed assets are bundled inside `reddev_towing`. Do not install or start a separate functional-flatbed resource.
 
-## Features
+## Requirements
 
-- Complete pickup, loading, delivery, unloading, and job-completion flow.
-- Bundled `flatbed3` vehicle and `inm_flatbed_base` movable bed assets.
-- Raise/lower controls with movement and hook safety checks.
-- Winch rope, hook attachment, automatic vehicle attachment option, and cable-distance cleanup.
-- Draggable tow-remote NUI supplied through the `towremote` inventory item.
-- Contract pricing, refundable truck deposit, and configurable XP rewards.
-- 25 configurable progression levels with payout multipliers and rewards.
-- Persistent jobs, earnings, distance, and towing XP statistics.
-- QBCore and ESX framework adapters.
-- `qb-target` and `ox_target` support.
-- Phone notifications for qb-phone/Renewed Phone, Quasar Smartphone, LB Phone, and YSeries.
-- Configurable vehicle-key event.
-
-## Included flatbed assets
-
-The following model identifiers must remain unchanged:
-
-- Tow vehicle: `flatbed3`
-- Movable bed object: `inm_flatbed_base`
-
-The resource includes the vehicle models, textures, object model, archetype definition, handling data, vehicle metadata, variations, colors, and vehicle-layout metadata. Only one `fxmanifest.lua` and one resource startup line are required.
-
-## Dependencies
-
-Required by the current manifest:
+The current `fxmanifest.lua` declares these dependencies:
 
 - `ox_lib`
 - `oxmysql`
 - `interact-sound`
-- QBCore (`qb-core`) or ESX (`es_extended`)
-- `qb-target` or `ox_target`
-- A compatible inventory containing the `towremote` item
 
-Integration dependencies:
+The live configuration also uses:
 
-- A supported phone resource when mission emails are enabled.
-- Your configured vehicle-key resource/event.
+- QBCore through `qb-core`
+- `ox_target`
+- `qb-phone` for mission notifications
+- The vehicle-key event `vehiclekeys:client:SetOwner`
+- A framework/inventory item named `towremote`
+- `qs-advancedgarages` only when persistent impounding is wanted
+
+Physical towing continues to work when the persistent garage integration is disabled or unavailable.
+
+### Bundled flatbed assets
+
+Keep these model names unchanged:
+
+- Tow truck: `flatbed3`
+- Movable bed: `inm_flatbed_base`
+
+The resource includes the required vehicle models, textures, bed object, archetype, handling, vehicle metadata, variations, colors, and vehicle-layout data. There is only one towing resource to start.
 
 ## Installation
 
-1. Place the complete folder in your resources directory as `reddev_towing`.
-2. Do not rename the folder, `flatbed3`, or `inm_flatbed_base`.
-3. Import `player_tow_data.sql` into the database used by `oxmysql`.
-4. Add the `towremote` item to the active framework/inventory item definitions.
+1. Place the complete resource at `resources/reddev_towing`.
+2. Keep the folder name `reddev_towing` and the model names `flatbed3` and `inm_flatbed_base`.
+3. Import the bundled `player_tow_data.sql` through the database used by `oxmysql`. This table stores towing XP, completed jobs, earnings, and distance statistics.
+4. Define `towremote` as a usable item in the active framework/inventory. The live QBCore item uses the image `towremote.png`.
 5. Copy `ItemPNG/towremote.png` into the active inventory image directory.
-6. Copy `InteractSoundFiles/flatbedsound.ogg` and `InteractSoundFiles/winchsound.ogg` into the active `interact-sound/client/html/sounds` directory.
-7. Configure the framework, target, phone, and vehicle-key settings in `config.lua`.
-8. Start the dependencies before `reddev_towing`.
+6. Copy `InteractSoundFiles/flatbedsound.ogg` and `InteractSoundFiles/winchsound.ogg` into `interact-sound/client/html/sounds`.
+7. Configure the framework, target, phone, key event, and garage mode in `config.lua`.
+8. Start all dependencies and the optional garage resource before `reddev_towing`.
 
-### Startup order
-
-Use only one towing-resource startup entry. A typical QBCore order is:
+The active QBCore installation should follow this order:
 
 ```cfg
 ensure oxmysql
 ensure ox_lib
-ensure interact-sound
 ensure qb-core
+ensure interact-sound
 ensure ox_target
 ensure qb-phone
+ensure qs-advancedgarages
 ensure reddev_towing
 ```
 
-Replace the target and phone resource names with the integrations used by your server. Do not add `ensure vd-towjob`, `ensure flatbed3`, or a separate functional-flatbed ensure line.
+If persistent impounding is disabled, the `qs-advancedgarages` line is not required by `reddev_towing`. Do not add a separate `flatbed3`, `inm_flatbed_base`, or old tow-job startup line.
 
-## Tow remote item
-
-### QBCore
-
-Add the following entry to `qb-core/shared/items.lua` if the item does not already exist:
-
-```lua
-['towremote'] = {
-    name = 'towremote',
-    label = 'Tow Remote',
-    weight = 100,
-    type = 'item',
-    image = 'towremote.png',
-    unique = false,
-    useable = true,
-    shouldClose = true,
-    combinable = nil,
-    description = 'Remote control for the tow truck'
-},
-```
-
-If `ox_inventory` imports QBCore shared items, define the item only once in the QBCore file. Otherwise add an equivalent `towremote` definition to the inventory's own item data file.
-
-### ESX
-
-Create a usable item named `towremote` in the item system used by your ESX server and install `towremote.png` in the matching inventory image directory.
-
-## Database
-
-Import the supplied file:
+After installation or configuration changes, restart the resource from the server console:
 
 ```text
-player_tow_data.sql
+restart reddev_towing
 ```
-
-It creates the `player_tow_data` table used for:
-
-- Towing XP
-- Completed-job count
-- Total earnings
-- Total towing distance
-- Created and updated timestamps
-
-The player citizen/character identifier is stored in `citizenid`.
 
 ## Configuration
 
-The main options are in `config.lua`.
-
-### Framework
+These examples match the current live `config.lua`:
 
 ```lua
-Framework = "QBCore" -- or "ESX"
+Framework = "QBCore"
 Config.CoreName = "qb-core"
-```
 
-For ESX, use `Framework = "ESX"` and set `Config.CoreName` to the name of the active ESX core resource.
-
-### Target, phone, and keys
-
-```lua
-Config.Target = "ox_target" -- or "qb-target"
+Config.Target = "ox_target"
 Config.Phone = "qb"
 Config.VehicleKeysEvent = "vehiclekeys:client:SetOwner"
-```
 
-Supported phone configuration values include:
-
-- `qb` for qb-phone and the shared QB/Renewed notification path
-- `renewed` for Renewed Phone
-- `quasar` for Quasar Smartphone
-- `lb` for LB Phone
-- `yseries` for YSeries
-
-Set the vehicle-key event to the client event provided by your keys resource.
-
-### Flatbed and winch behavior
-
-```lua
 Config.TowVehicleModel = "flatbed3"
 Config.AutomaticallHookVehicle = true
-Config.SetVehiclesLocked = true
-Config.WarpPlayerToVehicle = false
 Config.MaxCableDistance = 15.0
-Config.MaxDepotDistance = 150.0
+
+Config.GarageSystem = "auto"
+Config.AllowUnownedVehicleDisposal = true
 ```
 
-Keep `Config.TowVehicleModel` set to `flatbed3` unless you have intentionally rebuilt all matching flatbed behavior and assets.
+The only supported `Config.GarageSystem` values are:
 
-### Economy and progression
+| Value | Behavior |
+| --- | --- |
+| `"auto"` | Detects a started, verified `qs-advancedgarages` resource. This is the live value. |
+| `"qs-advancedgarages"` | Requires that exact resource to be started. |
+| `"none"` | Disables persistent impounding while leaving physical towing available. |
+
+The current persistent-impound settings are:
 
 ```lua
-Config.TowTruckDeposit = 1000
-Config.FlatbedRefundAmount = 900
-Config.EarnableRepMin = 50
-Config.EarnableRepMax = 75
+Config.Impound = {
+    enabled = true,
+    defaultReason = "Towed by authorized operator",
+    defaultFee = 500,
+    defaultDuration = 0,
+    allowPayToRelease = true,
+    requireTowJob = true,
+    requireOnDuty = true,
+    allowedJobs = {
+        tow = true,
+        police = true,
+    },
+
+    interactionDistance = 30.0,
+    playerToTruckDistance = 15.0,
+    truckToVehicleDistance = 12.0,
+    bedToTruckDistance = 12.0,
+    requestTimeout = 30000,
+    cleanupDelay = 350,
+    deleteFallbackDelay = 1500,
+}
 ```
 
-`Config.ContractPricing` controls distance-based contract payments and minimum payout. `Config.TowProgression` contains all 25 level thresholds, multipliers, titles, bonuses, and rewards.
+The default duration of `0` allows immediate paid release through the garage system. The default release fee is `$500`.
 
-### Locations and mission vehicles
+### Current road impound location
 
-The configuration also controls:
+`reddev_towing` reads impound lots from the active QS configuration instead of duplicating them in its own config. The current valid road-vehicle lot is:
 
-- Map blip and tow-company NPC location
-- Flatbed spawn points
-- Vehicle drop-off and depot coordinates
-- Random contract vehicle spawn points
-- Vehicle models eligible for generated contracts
-- Player-facing labels and notifications
+| Lot | Interaction coordinates | Vehicle release/spawn coordinates |
+| --- | --- | --- |
+| Hayes Autos | `vec3(483.75, -1312.29, 29.21)` | `vec4(493.279114, -1329.283569, 29.027100, 328.818909)` |
 
-After changing coordinates, verify that each spawn and drop-off zone is clear of map props and other scripted entities.
+The flatbed, target vehicle, and operator must be within `30.0` metres of the configured road impound. The configured plane and boat impounds are not valid for road vehicles.
 
-## Commands and controls
+### Tow remote item
 
-- `/toggletow` raises or lowers the bed while using the configured flatbed.
-- `/towhook` grabs or returns the hook and manages vehicle attachment.
-- Use the `towremote` item to open the remote-control interface.
-- The configured interaction key is shown in the in-game prompts when the player is close enough to the hook or delivery point.
+The usable item identifier is `towremote`. It is registered in `server/main.lua` and is also issued during the towing mission flow. The identifier is currently fixed in the resource rather than exposed as a separate config value.
 
-## Typical job flow
+## How to Tow a Vehicle
 
-1. Visit the tow-company NPC and open the towing menu.
-2. Select a contract and borrow the flatbed.
-3. Drive to the marked disabled vehicle.
-4. Lower the bed, collect the hook, and attach it to the target vehicle.
-5. Use the winch to load the vehicle, return the hook, and raise the bed.
-6. Drive to the marked depot.
-7. Lower the bed and unload/detach the vehicle.
-8. Return to the tow-company NPC to finish the contract and receive payment and XP.
+### Hook and winch procedure
+
+1. Wait until the target vehicle is completely empty. The driver seat and every passenger seat must be free.
+2. Position `flatbed3` in front of or behind the target vehicle and align the vehicle with the centre of the bed.
+3. Lower the bed with the tow remote or `/toggletow` while sitting in `flatbed3`.
+4. Exit the truck.
+5. Walk to the rear hook and press `E` to collect it.
+6. Walk to the front or rear bumper of the target vehicle and press `E` again to attach the cable.
+7. Open the tow remote and hold the **Wind Hook** control to pull the vehicle onto the bed.
+8. With `Config.AutomaticallHookVehicle = true`, keep the vehicle aligned and allow the automatic bed attachment to complete when it reaches the correct position.
+9. Raise the bed before driving away.
+
+The winch rejects the flatbed itself, occupied vehicles, invalid entities, and vehicles for which network control cannot be obtained.
+
+### Quick attach
+
+The remote can attach a vehicle without using the physical hook when all of these conditions are met:
+
+- The bed is fully lowered.
+- The vehicle is empty.
+- The vehicle is centred at the rear of the bed.
+- The vehicle is within approximately `3.7` metres of the flatbed hook point.
+
+Select **ATTACH** on the tow remote. Use **DETACH** while the bed is lowered to remove an attached vehicle.
+
+## Player-Owned Vehicle Support
+
+Regular player-owned vehicles can be physically towed; towing is not limited to mission or NPC vehicles.
+
+- The vehicle must be empty.
+- Physical towing does not change ownership.
+- Persistent impounding preserves the ownership record and plate.
+- Saved vehicle properties, fuel, engine health, and body health are preserved during a successful QS impound.
+- Vehicle keys are not transferred to the tow operator.
+
+If the resource cannot obtain network control, the vehicle remains in place and the attach attempt is rejected.
+
+## Persistent Impounding
+
+To persistently impound a road vehicle:
+
+1. Be on duty with the `tow` or `police` job.
+2. Attach the empty vehicle to the bed of `flatbed3`.
+3. Transport it to the valid QS road impound. On the current server, this is **Hayes Autos** at `vec3(483.75, -1312.29, 29.21)`.
+4. Keep the loaded flatbed and your player within the configured `30.0`-metre interaction range.
+5. Open the tow remote.
+6. Select **IMPOUND**.
+
+For a player-owned vehicle, the ownership record is updated and the vehicle becomes available through the QS impound UI with the configured `$500` release fee. For an NPC or otherwise unowned vehicle, the entity is disposed without creating an ownership record.
+
+The **IMPOUND** button is available only when the supported garage integration is active, the operator is authorized and on duty, an empty vehicle is attached, and the loaded flatbed is at a valid road impound.
+
+## QS Advanced Garages Integration
+
+The current live server uses `qs-advancedgarages` version `5.0.20`. `Config.GarageSystem = "auto"` detects it when it is already started.
+
+- The integration uses the existing QS exports and `player_vehicles` records.
+- No QS resource files are modified by `reddev_towing`.
+- The current QS setting remains `Config.ImpoundJobs = { 'police' }`.
+- REDDEV Towing independently authorizes on-duty `tow` and `police` operators for its remote **IMPOUND** action.
+- A successful owned-vehicle impound uses garage state `2`.
+- The selected garage, depot price, impound data, vehicle properties, fuel, engine health, and body health are persisted.
+- The owner/citizen identifier and plate are not replaced.
+- The world entity is removed only after the persistence update succeeds.
+
+If persistence fails or the record changes during the request, the operation fails safely and the vehicle is not deleted.
+
+## NPC and Unowned Vehicles
+
+NPC and other unowned vehicles can be physically towed and, with the live setting below, disposed at a valid QS road impound:
+
+```lua
+Config.AllowUnownedVehicleDisposal = true
+```
+
+No fake `player_vehicles` record is created. Setting this option to `false` prevents the persistent disposal of unowned vehicles; it does not disable ordinary physical towing.
+
+## Permissions
+
+The current authorization rules apply to persistent impounding:
+
+- Allowed jobs: `tow` and `police`
+- On-duty status: required
+- Vehicle occupancy: every seat must be empty
+- Valid road impound: required
+- Server distance checks: player-to-truck `15.0` m, truck-to-vehicle `12.0` m, bed-to-truck `12.0` m, and impound interaction range `30.0` m
+- Verified physical attachment to the correct `flatbed3` bed: required
+
+The current physical hook, winch, and quick-attach controls are not job-gated by `Config.Impound.allowedJobs`; that table controls the persistent **IMPOUND** action.
+
+## Network and Safety
+
+The client sends network IDs for the tow truck, movable bed, and target vehicle. The server then checks the entities, entity types, `flatbed3` model, plate, saved model, player distance, lot distance, empty seats, and recorded physical attachment.
+
+Duplicate requests for the same vehicle or plate are blocked. Invalid or stale entities are rejected. Pending request and tow-attachment state is cleared when it expires, when an entity disappears, when a player disconnects, or when the resource stops.
+
+For player-owned vehicles, deletion is authorized only after the garage update succeeds. The client performs the normal cleanup, with a delayed server fallback if the client cannot complete it.
+
+## Commands and Controls
+
+| Command or control | Current behavior |
+| --- | --- |
+| `/toggletow` | While inside `flatbed3`, lowers or raises the bed. Raising is blocked while the hook is still attached to a vehicle. |
+| `/towhook` | Outside a vehicle, collects, returns, drops, or attaches the hook. |
+| `E` | Default key mapping for `/towhook`. Use it near the rear hook or a target bumper. It can be rebound in FiveM key settings. |
+| Use `towremote` | Opens the draggable tow remote. |
+| **Wind Hook** | Hold to wind the attached cable. |
+| **Raise Bed / Lower Bed** | Moves the flatbed bed. |
+| **ATTACH / DETACH** | Quick-attaches an eligible nearby vehicle or detaches a loaded vehicle. |
+| **IMPOUND** | Sends an authorized persistent impound request at a valid road lot. |
+| **REMOVE HOOK** | Removes the active hook/cable connection. |
+
+There is no current default `G` key mapping for the bed and no separate `/impound` command. Use the tow remote or `/toggletow` for bed movement and the remote **IMPOUND** button for persistent impounding.
+
+## Feature List
+
+- Bundled `flatbed3` truck and `inm_flatbed_base` movable bed assets
+- Physical hook, rope, and hold-to-wind winch
+- Automatic bed attachment after winching
+- Tow-remote bed, winch, attach, detach, hook-removal, and impound controls
+- Quick attachment for centred empty vehicles within approximately `3.7` metres
+- Physical towing of NPC and regular player-owned vehicles
+- Empty-vehicle safety restriction
+- Contract missions, payouts, towing XP, statistics, and 25 progression levels
+- Automatic detection of `qs-advancedgarages`
+- Persistent player-owned vehicle impounding through QS
+- Optional NPC/unowned vehicle disposal without fake ownership records
+- Independent on-duty `tow` and `police` authorization
+- Ownership, plate, vehicle-property, fuel, engine, and body-state preservation
+- Network ID validation, attachment validation, duplicate protection, and safe cleanup
 
 ## Troubleshooting
 
-### The resource does not start
+### Tow remote does not open
 
-- Confirm the folder is named exactly `reddev_towing`.
-- Start `ox_lib`, `oxmysql`, `interact-sound`, and the selected framework first.
-- Confirm every merged `data/` and `stream/` file is still present.
-- Do not install the old tow-job or flatbed resources alongside this resource.
+- Confirm the item name is exactly `towremote` and that it is usable in the active framework/inventory.
+- Confirm `towremote.png` is installed in the inventory image directory.
+- Check that `qb-core` and the inventory started before `reddev_towing`.
+- Restart the framework/inventory after adding the item, then run `restart reddev_towing`.
 
-### The flatbed or bed object is missing
+### Hook cannot be picked up
 
-- Confirm `flatbed3` exists in the resource's `stream/` and `data/` files.
-- Confirm `inm_flatbed_base.ydr` and `def_flatbed3_props.ytyp` are present.
-- Confirm the manifest still contains the `DLC_ITYP_REQUEST` declaration.
-- Clear the FiveM client cache after replacing streamed assets.
+- Fully lower the bed first; the internal bed state must be the lowered state.
+- Exit the truck and stand near the rear hook. Pickup range is approximately `2.9` metres.
+- Press `E` or run `/towhook`.
+- If a stale rope is visible, use **REMOVE HOOK**, reposition the truck, and try again.
 
-### The remote does not open
+### Vehicle will not attach
 
-- Confirm the item ID is exactly `towremote`.
-- Confirm the item is marked usable by the framework or inventory.
-- Check that `towremote.png` is in the active inventory image directory.
-- Restart the framework/inventory after adding the item definition.
+- Make sure every seat is empty.
+- Confirm the bed is fully lowered.
+- For the winch, attach at the front or rear bumper and keep the cable within the configured `15.0`-metre maximum.
+- For quick attach, centre the vehicle within approximately `3.7` metres of the hook point.
+- If network control cannot be obtained, wait for the previous driver to exit and move away, then try again.
 
-### Bed or winch sounds are missing
+### Player-owned vehicle cannot be towed
 
-- Confirm both OGG files were copied into the active `interact-sound` sounds directory.
-- Restart `interact-sound` after installing the files.
-- Check the client console and server console for missing sound-name messages.
+Player-owned vehicles are supported. Check that the vehicle is empty, the bed is lowered, the vehicle is not the flatbed itself, and the client can obtain network control. Keys are not transferred to the operator.
 
-### XP or statistics do not save
+### IMPOUND button is unavailable
 
-- Import `player_tow_data.sql` into the active database.
-- Verify `oxmysql` is connected and started before the towing resource.
-- Check that the framework returns a valid citizen/character identifier.
+- Confirm an empty vehicle is physically attached to the bed, not only connected to the rope.
+- Confirm the operator has the `tow` or `police` job and is on duty.
+- Confirm `Config.Impound.enabled = true`.
+- Confirm the loaded flatbed is at the configured road impound and within `30.0` metres.
+- Confirm `qs-advancedgarages` is active and detected.
 
-### Mission emails do not arrive
+### No supported garage detected
 
-- Verify `Config.Phone` matches the active phone integration.
-- Start the phone resource before `reddev_towing`.
-- Check the configured phone resource's client event/API compatibility.
+- Use only `"auto"`, `"qs-advancedgarages"`, or `"none"` for `Config.GarageSystem`.
+- Start `qs-advancedgarages` before `reddev_towing`.
+- Check the server console for the REDDEV Towing integration status line.
+- Run `restart reddev_towing` after changing the mode or startup order.
 
-### Streaming-memory warning
+### Vehicle does not appear in the QS impound UI
 
-FiveM may report that `flatbed3.ytd` uses substantial physical streaming memory. This originates from the supplied vehicle texture dictionary. The resource can still start, but server owners should monitor client streaming performance and optimize the textures carefully before replacing the bundled YTD.
+- Confirm the plate belongs to exactly one valid player-owned road-vehicle record.
+- Confirm the entity plate and model match the saved record.
+- Confirm the live QS road impound is configured as `isImpound = true` with `type = 'vehicle'`.
+- Check the server console for a safe persistence rejection. The vehicle is intentionally kept when persistence is not confirmed.
+- Confirm the player is checking the same QS impound lot recorded by the tow action.
 
-## Validation checklist
+### Occupied vehicle is rejected
 
-After installation, verify all of the following in game:
+This is intentional. The driver seat and all passenger seats must be empty before hook attachment, quick attachment, or persistent impounding.
 
-- The tow-company NPC, target interaction, and contract menu appear.
-- `flatbed3` spawns and the configured key resource grants ownership.
-- `inm_flatbed_base` appears and moves with the flatbed.
-- The bed raises and lowers without duplicate movement.
-- Hook, rope, winch, attachment, detachment, and sounds work.
-- The `towremote` item opens the correct UI and shows the correct image.
-- A full contract awards payment and XP.
-- `player_tow_data` updates after completing a job.
-- Phone mission notifications arrive.
-- Canceling or returning the truck cleans up spawned entities.
+### Changes do not take effect
+
+Run:
+
+```text
+restart reddev_towing
+```
+
+If QS garage locations were changed, restart `qs-advancedgarages` first and then restart `reddev_towing` so the integration refreshes the active lots.
 
 ## Version
 
-Current documented release: `1.0.0`.
+REDDEV Towing resource version: `1.0.0`.
+
+QS Advanced Garages version verified on the current live server: `5.0.20`.
